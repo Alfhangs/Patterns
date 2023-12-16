@@ -31,7 +31,7 @@ public class EventQueue : MonoBehaviour
         _observers[eventId] = eventObservers;
     }
 
-    public void Unsubscribe(EventIds eventId, EventObserver eventObserver)
+    public void UnSubscribe(EventIds eventId, EventObserver eventObserver)
     {
         _observers[eventId].Remove(eventObserver);
     }

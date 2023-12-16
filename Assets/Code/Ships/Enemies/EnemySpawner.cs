@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Ships.Enemies
 {
-    public class EnemySpawner : MonoBehaviour, EventObserver
+    public class EnemySpawner : MonoBehaviour
     {
         [SerializeField] private Transform[] _spawnPositions;
         [SerializeField] private LevelConfiguration _levelConfiguration;
@@ -15,14 +15,10 @@ namespace Ships.Enemies
         private int _currentConfigurationIndex;
         private bool _canSpawn;
 
-        private List<ShipMediator> _spawnedShips;
 
         private void Awake()
         {
-            _spawnedShips = new List<ShipMediator>();
             _shipFactory = new ShipFactory(Instantiate(_shipsConfiguration));
-
-            EventQueue.Instance.Subscribe(EventIds.ShipDestroyed, this);
         }
 
         public void StartSpawn()
@@ -35,13 +31,6 @@ namespace Ships.Enemies
             _canSpawn = false;
             _currentTimeInSeconds = 0f;
             _currentConfigurationIndex = 0;
-
-            foreach (var shipMediator in _spawnedShips)
-            {
-                Destroy(shipMediator.gameObject);
-            }
-
-            _spawnedShips.Clear();
         }
 
         private void Update()
@@ -82,18 +71,9 @@ namespace Ships.Enemies
                           .WithCheckLimitType(ShipBuilder.CheckLimitTypes.InitialPosition)
                           .WithConfiguration(shipConfiguration)
                           .WithTeam(Teams.Enemy)
+                          .WithChecBottomDestroyLimit()
                           .Build();
-                _spawnedShips.Add(ship);
             }
-        }
-
-        public void Process(EventData eventData)
-        {
-            if (eventData.EventId != EventIds.ShipDestroyed)
-            {
-                return;
-            }
-            var shipDestroyEventData = (ShipDestroyedEventData)eventData;
         }
     }
 }

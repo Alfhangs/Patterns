@@ -1,3 +1,4 @@
+using CheckDestroyLimit;
 using Ships.Weapons;
 using UnityEngine;
 
@@ -7,6 +8,7 @@ namespace Ships.Common
     {
         public readonly Input.Input Input;
         public readonly CheckLimits.CheckLimits CheckLimits;
+        public readonly ICheckDestroyLimit CheckDestroyLimit;
 
         public readonly Vector2 Speed;
         public readonly int Health;
@@ -18,7 +20,7 @@ namespace Ships.Common
 
         public ShipConfiguration(Input.Input input, CheckLimits.CheckLimits checkLimits,
                                  Vector2 speed, int health, float fireRate,
-                                 ProjectileId defaultProjectileId, Teams team, int score)
+                                 ProjectileId defaultProjectileId, Teams team, int score, ICheckDestroyLimit checkDestroyLimit)
         {
             Input = input;
             CheckLimits = checkLimits;
@@ -28,6 +30,7 @@ namespace Ships.Common
             DefaultProjectileId = defaultProjectileId;
             Team = team;
             Score = score;
+            CheckDestroyLimit = checkDestroyLimit;
         }
 
     }

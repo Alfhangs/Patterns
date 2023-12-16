@@ -5,18 +5,20 @@ using UnityEngine;
 
 public class ShipDestroyedEventData : EventData
 {
-    private readonly int score;
-    private readonly Teams teams;
+    private readonly int _scoreToAdd;
+    private readonly Teams _team;
+    private readonly int _instanceId;
 
-    public int Score => score;
+    public int ScoreToAdd => _scoreToAdd;
 
-    public Teams Teams => teams;
-    public ShipDestroyedEventData(int scoreToAdd, Teams team) : base(EventIds.ShipDestroyed)
+    public Teams Team => _team;
+
+    public int InstanceId => _instanceId;
+
+    public ShipDestroyedEventData(int scoreToAdd, Teams team, int instanceId) : base(EventIds.ShipDestroyed)
     {
-        score = scoreToAdd;
-        teams = team;
+        _scoreToAdd = scoreToAdd;
+        _team = team;
+        _instanceId = instanceId;
     }
-
-
-
 }

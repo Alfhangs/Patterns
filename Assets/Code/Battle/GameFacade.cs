@@ -23,8 +23,6 @@ namespace Battle
         {
             _screenFade.Show();
             _enemySpawner.StopAndReset();
-            _shipInstaller.DestroyUserShip();
         }
-
     }
 }

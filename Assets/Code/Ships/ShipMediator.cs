@@ -8,7 +8,7 @@ namespace Ships
 {
     [RequireComponent(typeof(MovementController))]
     [RequireComponent(typeof(WeaponController))]
-    public class ShipMediator : MonoBehaviour, Ship
+    public class ShipMediator : MonoBehaviour, Ship, EventObserver
     {
         [SerializeField] private MovementController _movementController;
         [SerializeField] private WeaponController _weaponController;
@@ -17,12 +17,24 @@ namespace Ships
         [SerializeField] private ShipId _shipId;
         public string Id => _shipId.Value;
 
+        private CheckDestroyLimit.ICheckDestroyLimit _checkDestroyLimit;
         private Input.Input _input;
         private Teams _team;
         private int _score;
 
+        private void Start()
+        {
+            EventQueue.Instance.Subscribe(EventIds.GameOver, this);
+        }
+
+        private void OnDestroy()
+        {
+            EventQueue.Instance.UnSubscribe(EventIds.GameOver, this);
+        }
+
         public void Configure(ShipConfiguration configuration)
         {
+            _checkDestroyLimit = configuration.CheckDestroyLimit;
             _input = configuration.Input;
             _movementController.Configure(this, configuration.CheckLimits, configuration.Speed);
             _weaponController.Configure(this, configuration.FireRate, configuration.DefaultProjectileId, configuration.Team);
@@ -40,8 +52,18 @@ namespace Ships
         private void Update()
         {
             TryShoot();
+            CheckDestroyLimits();
         }
-
+        private void CheckDestroyLimits()
+        {
+            if (_checkDestroyLimit.IsInsideLimits(transform.position))
+            {
+                return;
+            }
+            Destroy(gameObject);
+            var shipDestroyEventData = new ShipDestroyedEventData(0, _team, GetInstanceID());
+            EventQueue.Instance.EnqueueEvent(shipDestroyEventData);
+        }
         private void TryShoot()
         {
             if (_input.IsFireActionPressed())
@@ -57,7 +79,7 @@ namespace Ships
             {
                 return;
             }
-            
+
             damageable.AddDamage(1);
         }
 
@@ -66,9 +88,17 @@ namespace Ships
             if (isDeath)
             {
                 Destroy(gameObject);
-                var shipDestroyEventData = new ShipDestroyedEventData(_score, _team);
-                EventQueue.Instance.EnqueueEvent(shipDestroyEventData);                
+                var shipDestroyEventData = new ShipDestroyedEventData(_score, _team, GetInstanceID());
+                EventQueue.Instance.EnqueueEvent(shipDestroyEventData);
             }
+        }
+
+        public void Process(EventData eventData)
+        {
+            if (eventData.EventId != EventIds.GameOver)
+                return;
+
+            Destroy(gameObject);
         }
     }
 }
