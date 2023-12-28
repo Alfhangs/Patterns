@@ -5,5 +5,8 @@ using UnityEngine;
 public enum EventIds
 {
     ShipDestroyed,
-    GameOver
+    ShipSpawned,
+    AllShipSpawned,
+    GameOver,
+    Victory
 }

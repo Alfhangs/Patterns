@@ -7,22 +7,23 @@ namespace Battle
 {
     public class GameFacade : MonoBehaviour
     {
-        [SerializeField] private ScreenFade _screenFade;
-        [SerializeField] private ShipInstaller _shipInstaller;
-        [SerializeField] private EnemySpawner _enemySpawner;
-        
+        [SerializeField] private ScreenFade screenFade;
+        [SerializeField] private ShipInstaller shipInstaller;
+        [SerializeField] private EnemySpawner enemySpawner;
+        [SerializeField] private GameState gameState;
         public void StartBattle()
         {
+            gameState.Reset();
             ScoreView.Instance.Reset();
-            _enemySpawner.StartSpawn();
-            _shipInstaller.SpawnUserShip();
-            _screenFade.Hide();
+            enemySpawner.StartSpawn();
+            shipInstaller.SpawnUserShip();
+            screenFade.Hide();
         }
 
         public void StopBattle()
         {
-            _screenFade.Show();
-            _enemySpawner.StopAndReset();
+            screenFade.Show();
+            enemySpawner.StopAndReset();
         }
     }
 }

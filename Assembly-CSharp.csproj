@@ -102,6 +102,7 @@
     <Compile Include="Assets\Code\Input\JoyButton.cs" />
     <Compile Include="Assets\Patterns\Observer\Solution2\Skill.cs" />
     <Compile Include="Assets\Patterns\Decoupling\EventQueue\EventQueue.cs" />
+    <Compile Include="Assets\Code\Ships\CheckDestroyLimits\ICheckDestroyLimit.cs" />
     <Compile Include="Assets\Patterns\Builder\Armors\ReflectiveArmor.cs" />
     <Compile Include="Assets\Patterns\Factory\EnemyId.cs" />
     <Compile Include="Assets\Code\UI\ScreenFade.cs" />
@@ -141,6 +142,7 @@
     <Compile Include="Assets\Patterns\Facade\Menu.cs" />
     <Compile Include="Assets\Patterns\Observer\Solution2\SkillView.cs" />
     <Compile Include="Assets\Patterns\TemplateMethod\Hero.cs" />
+    <Compile Include="Assets\Code\Ships\CheckDestroyLimits\DoNotCheckDestroyLimitStrategy.cs" />
     <Compile Include="Assets\Patterns\Observer\Solution2\ISkill.cs" />
     <Compile Include="Assets\Patterns\Builder\Weapons\Weapon.cs" />
     <Compile Include="Assets\Code\Input\Input.cs" />
@@ -167,11 +169,11 @@
     <Compile Include="Assets\Patterns\Observer\Solution1\SkillView.cs" />
     <Compile Include="Assets\Code\Ships\CheckLimits\ViewportCheckLimits.cs" />
     <Compile Include="Assets\Code\Ships\CheckLimits\InitialPositionCheckLimits.cs" />
+    <Compile Include="Assets\Code\Ships\CheckDestroyLimits\CheckBottomDestroyLimitStrategy.cs" />
     <Compile Include="Assets\Patterns\Decoupling\EventQueue\EventIds.cs" />
     <Compile Include="Assets\Patterns\Factory\Archer.cs" />
-    <Compile Include="Assets\Code\Ships\CheckDestroyLimits\DoNotCheckDestroyLimitStrategy.cs" />
-    <Compile Include="Assets\Code\Ships\CheckDestroyLimits\CheckBottomDestroyLimitStrategy.cs" />
-    <Compile Include="Assets\Code\Ships\CheckDestroyLimits\ICheckDestroyLimit.cs" />
+    <Compile Include="Assets\Code\Battle\GameState.cs" />
+    <Compile Include="Assets\Code\UI\VictoryView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
