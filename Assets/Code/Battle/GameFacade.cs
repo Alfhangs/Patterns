@@ -7,22 +7,21 @@ namespace Battle
 {
     public class GameFacade : MonoBehaviour
     {
-        [SerializeField] private ScreenFade screenFade;
         [SerializeField] private ShipInstaller shipInstaller;
         [SerializeField] private EnemySpawner enemySpawner;
-        [SerializeField] private GameState gameState;
+        [SerializeField] private GameStateController gameState;
         public void StartBattle()
         {
             gameState.Reset();
             ScoreView.Instance.Reset();
             enemySpawner.StartSpawn();
             shipInstaller.SpawnUserShip();
-            screenFade.Hide();
+            LoadingScreen.instance.Hide();
         }
 
         public void StopBattle()
         {
-            screenFade.Show();
+            LoadingScreen.instance.Show();
             enemySpawner.StopAndReset();
         }
     }

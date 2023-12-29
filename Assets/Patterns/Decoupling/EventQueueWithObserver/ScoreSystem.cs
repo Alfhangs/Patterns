@@ -7,7 +7,6 @@ namespace Patterns.Decoupling.EventQueueWithObserver
         public ScoreSystem()
         {
             EventQueue.Instance.Subscribe(EventIds.EnemyDeath, this);
-            EventQueue.Instance.Subscribe(EventIds.EnemyDeath, this);
         }
 
         public void Process(EventData eventData)
