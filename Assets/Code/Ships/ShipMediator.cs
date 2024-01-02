@@ -1,4 +1,5 @@
 using System;
+using Patterns.Decoupling.ServiceLocator;
 using Ships.Common;
 using Ships.Weapons;
 using UI;
@@ -24,14 +25,14 @@ namespace Ships
 
         private void Start()
         {
-            EventQueue.Instance.Subscribe(EventIds.GameOver, this);
-            EventQueue.Instance.Subscribe(EventIds.Victory, this);
+            ServiceLocator.Instance.GetService<IEventQueue>().Subscribe(EventIds.GameOver, this);
+            ServiceLocator.Instance.GetService<IEventQueue>().Subscribe(EventIds.Victory, this);
         }
 
         private void OnDestroy()
         {
-            EventQueue.Instance.UnSubscribe(EventIds.GameOver, this);
-            EventQueue.Instance.UnSubscribe(EventIds.Victory, this);
+            ServiceLocator.Instance.GetService<IEventQueue>().UnSubscribe(EventIds.GameOver, this);
+            ServiceLocator.Instance.GetService<IEventQueue>().UnSubscribe(EventIds.Victory, this);
         }
 
         public void Configure(ShipConfiguration configuration)
@@ -64,7 +65,7 @@ namespace Ships
             }
             Destroy(gameObject);
             var shipDestroyEventData = new ShipDestroyedEventData(0, _team, GetInstanceID());
-            EventQueue.Instance.EnqueueEvent(shipDestroyEventData);
+            ServiceLocator.Instance.GetService<IEventQueue>().EnqueueEvent(shipDestroyEventData);
         }
         private void TryShoot()
         {
@@ -91,7 +92,7 @@ namespace Ships
             {
                 Destroy(gameObject);
                 var shipDestroyEventData = new ShipDestroyedEventData(_score, _team, GetInstanceID());
-                EventQueue.Instance.EnqueueEvent(shipDestroyEventData);
+                ServiceLocator.Instance.GetService<IEventQueue>().EnqueueEvent(shipDestroyEventData);
             }
         }
 

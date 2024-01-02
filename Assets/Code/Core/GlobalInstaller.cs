@@ -1,22 +1,27 @@
-using Battle;
-using System.Collections;
-using System.Collections.Generic;
+using Patterns.Decoupling.ServiceLocator;
 using System.Threading.Tasks;
 using UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GlobalInstaller : MonoBehaviour
+public class GlobalInstaller : GeneralInstaller
 {
-    private async void Start()
-    {
-        DontDestroyOnLoad(LoadingScreen.instance.gameObject);
-        LoadingScreen.instance.Show();
 
+    protected override async void DoStart()
+    {
+        await LoadNextScene();
+    }
+    protected override void DoInstallDependencies()
+    {
+    }
+
+    private async Task LoadNextScene()
+    {
         await LoadScene("Gameplay");
 
-        LoadingScreen.instance.Hide();
+        ServiceLocator.Instance.GetService<LoadingScreen>().Hide();
     }
+
     private async Task LoadScene(string sceneName)
     {
         var loadSceneAsync = SceneManager.LoadSceneAsync(sceneName);

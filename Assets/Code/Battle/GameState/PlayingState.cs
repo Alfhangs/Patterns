@@ -1,4 +1,5 @@
-﻿using Ships.Common;
+﻿using Patterns.Decoupling.ServiceLocator;
+using Ships.Common;
 using System;
 
 namespace Battle
@@ -16,16 +17,16 @@ namespace Battle
             aliveShip = 0;
             allShipSpawned = false;
 
-            EventQueue.Instance.Subscribe(EventIds.ShipDestroyed, this);
-            EventQueue.Instance.Subscribe(EventIds.ShipSpawned, this);
-            EventQueue.Instance.Subscribe(EventIds.AllShipSpawned, this);
+            ServiceLocator.Instance.GetService<IEventQueue>().Subscribe(EventIds.ShipDestroyed, this);
+            ServiceLocator.Instance.GetService<IEventQueue>().Subscribe(EventIds.ShipSpawned, this);
+            ServiceLocator.Instance.GetService<IEventQueue>().Subscribe(EventIds.AllShipSpawned, this);
         }
 
         public void Stop()
         {
-            EventQueue.Instance.UnSubscribe(EventIds.ShipDestroyed, this);
-            EventQueue.Instance.UnSubscribe(EventIds.ShipSpawned, this);
-            EventQueue.Instance.UnSubscribe(EventIds.AllShipSpawned, this);
+            ServiceLocator.Instance.GetService<IEventQueue>().UnSubscribe(EventIds.ShipDestroyed, this);
+            ServiceLocator.Instance.GetService<IEventQueue>().UnSubscribe(EventIds.ShipSpawned, this);
+            ServiceLocator.Instance.GetService<IEventQueue>().UnSubscribe(EventIds.AllShipSpawned, this);
         }
 
         public void Process(EventData eventData)

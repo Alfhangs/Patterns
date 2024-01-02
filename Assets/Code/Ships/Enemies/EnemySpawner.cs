@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Patterns.Decoupling.ServiceLocator;
 using Ships.Common;
 using UnityEngine;
 
@@ -57,7 +58,7 @@ namespace Ships.Enemies
             _currentConfigurationIndex += 1;
             if(_currentConfigurationIndex >= _levelConfiguration.SpawnConfigurations.Length)
             {
-                EventQueue.Instance.EnqueueEvent(new EventData(EventIds.AllShipSpawned));
+               ServiceLocator.Instance.GetService<IEventQueue>().EnqueueEvent(new EventData(EventIds.AllShipSpawned));
             }
         }
 
@@ -78,7 +79,7 @@ namespace Ships.Enemies
                           .WithChecBottomDestroyLimit()
                           .Build();
             }
-            EventQueue.Instance.EnqueueEvent(new EventData(EventIds.ShipSpawned));
+            ServiceLocator.Instance.GetService<IEventQueue>().EnqueueEvent(new EventData(EventIds.ShipSpawned));
         }
     }
 }

@@ -1,3 +1,4 @@
+using Patterns.Decoupling.ServiceLocator;
 using Ships.Common;
 using TMPro;
 using UnityEngine;
@@ -34,12 +35,12 @@ namespace UI
 
         private void Start()
         {
-            EventQueue.Instance.Subscribe(EventIds.ShipDestroyed, this);
+            ServiceLocator.Instance.GetService<IEventQueue>().Subscribe(EventIds.ShipDestroyed, this);
         }
 
         private void OnDestroy()
         {
-            EventQueue.Instance.UnSubscribe(EventIds.ShipDestroyed, this);
+            ServiceLocator.Instance.GetService<IEventQueue>().UnSubscribe(EventIds.ShipDestroyed, this);
         }
 
         public void Reset()

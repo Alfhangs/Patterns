@@ -1,4 +1,5 @@
 ﻿using Battle;
+using Patterns.Decoupling.ServiceLocator;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,17 +10,17 @@ namespace Battle
 {
     internal class GameOverState : IGameState
     {
-        private readonly GameFacade _gameFacade;
+        private readonly IGameFacade _igameFacade;
 
-        public GameOverState(GameFacade gameFacade)
+        public GameOverState(IGameFacade igameFacade)
         {
-            _gameFacade = gameFacade;
+            _igameFacade = igameFacade;
         }
 
         public void Start(Action<GameStateController.GameStates> onEndedCallback)
         {
-            _gameFacade.StopBattle();
-            EventQueue.Instance.EnqueueEvent(new EventData(EventIds.GameOver));
+            _igameFacade.StopBattle();
+            ServiceLocator.Instance.GetService<IEventQueue>().EnqueueEvent(new EventData(EventIds.GameOver));
         }
 
         public void Stop()

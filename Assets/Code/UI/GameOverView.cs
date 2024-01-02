@@ -1,4 +1,5 @@
 using Battle;
+using Patterns.Decoupling.ServiceLocator;
 using Ships.Common;
 using System;
 using TMPro;
@@ -19,15 +20,16 @@ namespace UI
         private void Start()
         {
             gameObject.SetActive(false);
-            EventQueue.Instance.Subscribe(EventIds.GameOver, this);
+            ServiceLocator.Instance.GetService<IEventQueue>().Subscribe(EventIds.GameOver, this);
         }
         private void OnDestroy()
         {
-            EventQueue.Instance.UnSubscribe(EventIds.GameOver, this);
+            ServiceLocator.Instance.GetService<IEventQueue>().UnSubscribe(EventIds.GameOver, this);
         }
 
         private void RestartGame()
         {
+            //ServiceLocator.Instance.GetService<IGameFacade>().StartBattle();
             gameObject.SetActive(false);
         }
 

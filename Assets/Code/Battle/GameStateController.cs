@@ -1,4 +1,5 @@
 using Battle;
+using Patterns.Decoupling.ServiceLocator;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -14,25 +15,19 @@ public class GameStateController : MonoBehaviour
         Victory
     }
 
-    private int aliveShip;
-    private bool allShipSpawned;
-
-    [SerializeField] private GameFacade gameFacade;
     private IGameState currentState;
 
     private Dictionary<GameStates, IGameState> idToState;
 
-    private void Awake()
+    private void Start()
     {
+        var gameFacade = ServiceLocator.Instance.GetService<IGameFacade>();
         idToState = new Dictionary<GameStates, IGameState>
         {
             {GameStates.Playing, new PlayingState() },
             {GameStates.GameOver, new GameOverState(gameFacade) },
             {GameStates.Victory, new VictoryState(gameFacade) }
         };
-    }
-    private void Start()
-    {
         currentState = GetState(GameStates.Playing);
         currentState.Start(ChangeNextState);
     }

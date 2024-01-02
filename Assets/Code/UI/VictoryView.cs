@@ -1,3 +1,4 @@
+using Patterns.Decoupling.ServiceLocator;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -18,15 +19,16 @@ namespace UI
         private void Start()
         {
             gameObject.SetActive(false);
-            EventQueue.Instance.Subscribe(EventIds.Victory, this);
+            ServiceLocator.Instance.GetService<IEventQueue>().Subscribe(EventIds.Victory, this);
         }
         private void OnDestroy()
         {
-            EventQueue.Instance.UnSubscribe(EventIds.Victory, this);
+            ServiceLocator.Instance.GetService<IEventQueue>().UnSubscribe(EventIds.Victory, this);
         }
 
         private void RestartGame()
         {
+            ServiceLocator.Instance.GetService<IGameFacade>().StartBattle();
             gameObject.SetActive(false);
         }
 
