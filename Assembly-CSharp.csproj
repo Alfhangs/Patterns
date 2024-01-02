@@ -64,6 +64,7 @@
     <Compile Include="Assets\Patterns\Behaviour\State\States\FindTargetState.cs" />
     <Compile Include="Assets\Patterns\Structural\Adapter\Data.cs" />
     <Compile Include="Assets\Patterns\Behaviour\Mediator\VehicleLight.cs" />
+    <Compile Include="Assets\Patterns\Decoupling\ServiceLocator\ServiceLocator.cs" />
     <Compile Include="Assets\Code\Ships\Weapons\Projectiles\LinealProjectile.cs" />
     <Compile Include="Assets\Code\Common\EventObserver.cs" />
     <Compile Include="Assets\Patterns\Decoupling\EventQueueWithObserver\EventData.cs" />
@@ -72,6 +73,7 @@
     <Compile Include="Assets\Code\Ships\Enemies\SpawnConfiguration.cs" />
     <Compile Include="Assets\Code\Ships\Common\Damageable.cs" />
     <Compile Include="Assets\Patterns\Behaviour\TemplateMethod\HealOverTime.cs" />
+    <Compile Include="Assets\Code\Common\EventQueueImp.cs" />
     <Compile Include="Assets\Code\Ships\ShipMediator.cs" />
     <Compile Include="Assets\Code\Battle\GameState\GameOverState.cs" />
     <Compile Include="Assets\Code\Ships\Weapons\ProjectilesConfiguration.cs" />
@@ -83,6 +85,7 @@
     <Compile Include="Assets\Code\Input\UnityInputAdapter.cs" />
     <Compile Include="Assets\Code\Ships\Weapons\Projectiles\SinusoidalProjectile.cs" />
     <Compile Include="Assets\Patterns\Decoupling\EventQueueWithObserver\Installer.cs" />
+    <Compile Include="Assets\Patterns\Decoupling\ServiceLocator\ScoreSystemMonoBehaviour2.cs" />
     <Compile Include="Assets\Patterns\Decoupling\EventQueueWithObserver\EnemyDeathEventData.cs" />
     <Compile Include="Assets\Patterns\Structural\Adapter\FileDataStoreAdapter.cs" />
     <Compile Include="Assets\Code\Ships\Weapons\ProjectileFactory.cs" />
@@ -97,6 +100,7 @@
     <Compile Include="Assets\Patterns\Creation\Builder\Armors\Armor.cs" />
     <Compile Include="Assets\Patterns\Behaviour\State\Enemy.cs" />
     <Compile Include="Assets\Code\Ships\Weapons\WeaponController.cs" />
+    <Compile Include="Assets\Patterns\Decoupling\ServiceLocator\IScoreSystem.cs" />
     <Compile Include="Assets\Code\Battle\GameState\VictoryState.cs" />
     <Compile Include="Assets\Patterns\Creation\Builder\Weapons\Bow.cs" />
     <Compile Include="Assets\Code\Common\EventData.cs" />
@@ -116,14 +120,18 @@
     <Compile Include="Assets\Code\Battle\GameFacade.cs" />
     <Compile Include="Assets\Patterns\Behaviour\State\TargetFinder.cs" />
     <Compile Include="Assets\Code\Ships\Enemies\LevelConfiguration.cs" />
+    <Compile Include="Assets\Code\Core\EventQueueInstaller.cs" />
     <Compile Include="Assets\Patterns\Behaviour\State\States\EnemyState.cs" />
     <Compile Include="Assets\Patterns\Behaviour\Observer\Solution1\Installer.cs" />
+    <Compile Include="Assets\Code\Core\Installer.cs" />
     <Compile Include="Assets\Patterns\Creation\Builder\Weapons\Sword.cs" />
     <Compile Include="Assets\Patterns\Structural\Facade\SaveData.cs" />
     <Compile Include="Assets\Code\Ships\Common\ShipBuilder.cs" />
     <Compile Include="Assets\Code\Battle\GameState\IGameState.cs" />
+    <Compile Include="Assets\Code\Common\IEventQueue.cs" />
     <Compile Include="Assets\Code\UI\LoadingScreen.cs" />
     <Compile Include="Assets\Patterns\Creation\Builder\Armors\NormalArmor.cs" />
+    <Compile Include="Assets\Code\Core\GeneralInstaller.cs" />
     <Compile Include="Assets\Code\UI\GameOverView.cs" />
     <Compile Include="Assets\Code\Ships\MovementController.cs" />
     <Compile Include="Assets\Patterns\Creation\Factory\EnemiesConfiguration.cs" />
@@ -140,7 +148,9 @@
     <Compile Include="Assets\Code\Ships\Weapons\Projectiles\CurveProjectile.cs" />
     <Compile Include="Assets\Patterns\Decoupling\EventQueueWithObserver\ScoreSystem.cs" />
     <Compile Include="Assets\Patterns\Behaviour\State\States\IdleState.cs" />
+    <Compile Include="Assets\Patterns\Decoupling\ServiceLocator\ScoreSystem.cs" />
     <Compile Include="Assets\Patterns\Creation\Builder\HeroBuilder.cs" />
+    <Compile Include="Assets\Code\Core\GameFacadeInstaller.cs" />
     <Compile Include="Assets\Patterns\Structural\Facade\EnemySpawner.cs" />
     <Compile Include="Assets\Patterns\Behaviour\Mediator\VehicleMediator.cs" />
     <Compile Include="Assets\Patterns\Decoupling\EventQueueWithObserver\EventQueue.cs" />
@@ -154,8 +164,10 @@
     <Compile Include="Assets\Patterns\Structural\Facade\Menu.cs" />
     <Compile Include="Assets\Code\Battle\GameState\PlayingState.cs" />
     <Compile Include="Assets\Patterns\Behaviour\Observer\Solution2\SkillView.cs" />
+    <Compile Include="Assets\Code\Battle\IGameFacade.cs" />
     <Compile Include="Assets\Patterns\Behaviour\TemplateMethod\Hero.cs" />
     <Compile Include="Assets\Code\Ships\CheckDestroyLimits\DoNotCheckDestroyLimitStrategy.cs" />
+    <Compile Include="Assets\Code\Core\GameInstaller.cs" />
     <Compile Include="Assets\Patterns\Behaviour\Observer\Solution2\ISkill.cs" />
     <Compile Include="Assets\Patterns\Creation\Builder\Weapons\Weapon.cs" />
     <Compile Include="Assets\Code\Input\Input.cs" />
@@ -165,6 +177,7 @@
     <Compile Include="Assets\Code\Ships\Common\ShipConfiguration.cs" />
     <Compile Include="Assets\Code\UI\VictoryView.cs" />
     <Compile Include="Assets\Patterns\Creation\Builder\Hero.cs" />
+    <Compile Include="Assets\Patterns\Decoupling\ServiceLocator\Consumer.cs" />
     <Compile Include="Assets\Patterns\Creation\Singleton\ScoreSystemMonoBehaviour.cs" />
     <Compile Include="Assets\Code\Ships\Common\Teams.cs" />
     <Compile Include="Assets\Patterns\Behaviour\Observer\Solution1\Subject.cs" />
@@ -178,29 +191,19 @@
     <Compile Include="Assets\Patterns\Behaviour\Mediator\Autopilot.cs" />
     <Compile Include="Assets\Patterns\Decoupling\EventQueue\AchievementsSystem.cs" />
     <Compile Include="Assets\Patterns\Decoupling\EventQueueWithObserver\Enemy.cs" />
+    <Compile Include="Assets\Patterns\Decoupling\ServiceLocator\Installer.cs" />
     <Compile Include="Assets\Patterns\Structural\Adapter\PlayerPrefsDataStoreAdapter.cs" />
     <Compile Include="Assets\Patterns\Decoupling\EventQueueWithObserver\AchievementsSystem.cs" />
+    <Compile Include="Assets\Code\Core\LoaderScreenInstaller.cs" />
     <Compile Include="Assets\Patterns\Behaviour\Observer\Solution1\SkillView.cs" />
     <Compile Include="Assets\Code\Ships\CheckLimits\ViewportCheckLimits.cs" />
     <Compile Include="Assets\Code\Ships\CheckLimits\InitialPositionCheckLimits.cs" />
     <Compile Include="Assets\Code\Ships\CheckDestroyLimits\CheckBottomDestroyLimitStrategy.cs" />
     <Compile Include="Assets\Patterns\Decoupling\EventQueue\EventIds.cs" />
     <Compile Include="Assets\Patterns\Creation\Factory\Archer.cs" />
-    <Compile Include="Assets\Patterns\Decoupling\ServiceLocator\Installer.cs" />
-    <Compile Include="Assets\Patterns\Decoupling\ServiceLocator\Consumer.cs" />
-    <Compile Include="Assets\Patterns\Decoupling\ServiceLocator\IScoreSystem.cs" />
-    <Compile Include="Assets\Patterns\Decoupling\ServiceLocator\ScoreSystem.cs" />
-    <Compile Include="Assets\Patterns\Decoupling\ServiceLocator\ScoreSystemMonoBehaviour2.cs" />
-    <Compile Include="Assets\Patterns\Decoupling\ServiceLocator\ServiceLocator.cs" />
-    <Compile Include="Assets\Code\Core\LoaderScreenInstaller.cs" />
-    <Compile Include="Assets\Code\Core\Installer.cs" />
-    <Compile Include="Assets\Code\Core\EventQueueInstaller.cs" />
-    <Compile Include="Assets\Code\Common\IEventQueue.cs" />
-    <Compile Include="Assets\Code\Common\EventQueueImp.cs" />
-    <Compile Include="Assets\Code\Core\GeneralInstaller.cs" />
-    <Compile Include="Assets\Code\Core\GameInstaller.cs" />
-    <Compile Include="Assets\Code\Core\GameFacadeInstaller.cs" />
-    <Compile Include="Assets\Code\Battle\IGameFacade.cs" />
+    <Compile Include="Assets\Code\Core\MenuInstaller.cs" />
+    <Compile Include="Assets\Code\UI\MainMenu.cs" />
+    <Compile Include="Assets\Code\Common\Commands\LoadSceneCommand.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
