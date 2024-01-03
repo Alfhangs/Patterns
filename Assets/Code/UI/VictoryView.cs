@@ -1,4 +1,6 @@
+using Patterns.Behaviour.Command;
 using Patterns.Decoupling.ServiceLocator;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -11,11 +13,14 @@ namespace UI
     {
         [SerializeField] private TextMeshProUGUI _scoreText;
         [SerializeField] private Button _restartButton;
+        [SerializeField] private Button _backToMenutButton;
 
         private void Awake()
         {
             _restartButton.onClick.AddListener(RestartGame);
+            _backToMenutButton.onClick.AddListener(BackToMenu);
         }
+
         private void Start()
         {
             gameObject.SetActive(false);
@@ -28,8 +33,13 @@ namespace UI
 
         private void RestartGame()
         {
-            ServiceLocator.Instance.GetService<IGameFacade>().StartBattle();
+            ServiceLocator.Instance.GetService<CommandQueue>().AddCommand(new StartBattleCommand());
             gameObject.SetActive(false);
+        }
+
+        private void BackToMenu()
+        {
+            ServiceLocator.Instance.GetService<CommandQueue>().AddCommand(new LoadSceneCommand("Menu"));
         }
 
         public void Process(EventData eventData)

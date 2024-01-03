@@ -1,17 +1,20 @@
+using Patterns.Behaviour.Command;
 using Patterns.Decoupling.ServiceLocator;
 using System.Threading.Tasks;
 using UI;
+using UnityEditor.Build;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GlobalInstaller : GeneralInstaller
 {
 
-    protected override async void DoStart()
+    protected override void DoStart()
     {
-        new LoadSceneCommand("Menu").Execute();
+        ServiceLocator.Instance.GetService<CommandQueue>().AddCommand( new LoadSceneCommand("Menu"));
     }
     protected override void DoInstallDependencies()
     {
+        ServiceLocator.Instance.RegisterService(CommandQueue.Instance);
     }
 }

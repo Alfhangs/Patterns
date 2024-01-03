@@ -1,4 +1,5 @@
 using Battle;
+using Patterns.Behaviour.Command;
 using Patterns.Decoupling.ServiceLocator;
 using Ships.Common;
 using System;
@@ -12,10 +13,12 @@ namespace UI
     {
         [SerializeField] private TextMeshProUGUI _scoreText;
         [SerializeField] private Button _restartButton;
+        [SerializeField] private Button _backToMenuButton;
 
         private void Awake()
         {
             _restartButton.onClick.AddListener(RestartGame);
+            _backToMenuButton.onClick.AddListener(BackToMenu);
         }
         private void Start()
         {
@@ -29,8 +32,13 @@ namespace UI
 
         private void RestartGame()
         {
-            //ServiceLocator.Instance.GetService<IGameFacade>().StartBattle();
+            ServiceLocator.Instance.GetService<CommandQueue>().AddCommand(new StartBattleCommand());
             gameObject.SetActive(false);
+        }
+
+        private void BackToMenu()
+        {
+            ServiceLocator.Instance.GetService<CommandQueue>().AddCommand(new LoadSceneCommand("Menu"));
         }
 
         public void Process(EventData eventData)

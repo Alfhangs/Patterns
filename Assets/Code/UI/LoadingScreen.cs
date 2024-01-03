@@ -10,12 +10,12 @@ namespace UI
 
         public void Show()
         {
-            _screenFadeImage.enabled = true;
+            gameObject.SetActive(true);
         }
         
         public void Hide()
         {
-            _screenFadeImage.enabled = false;
+            gameObject.SetActive(false);
         }
     }
 }
