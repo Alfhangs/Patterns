@@ -1,20 +1,21 @@
-﻿using Patterns.Decoupling.ServiceLocator;
+﻿using Patterns.Behaviour.Command;
+using Patterns.Decoupling.ServiceLocator;
 using System;
 
 namespace Battle
 {
     public class VictoryState : IGameState
     {
-        private readonly IGameFacade _igameFacade;
+        private readonly ICommand _stopBattleCommand;
 
-        public VictoryState(IGameFacade igameFacade)
+        public VictoryState(ICommand stopBattleCommand)
         {
-            _igameFacade = igameFacade;
+            _stopBattleCommand = stopBattleCommand;
         }
 
         public void Start(Action<GameStateController.GameStates> onEndedCallback)
         {
-            _igameFacade.StopBattle();
+            ServiceLocator.Instance.GetService<CommandQueue>().AddCommand(_stopBattleCommand);
             ServiceLocator.Instance.GetService<IEventQueue>().EnqueueEvent(new EventData(EventIds.Victory));
         }
 

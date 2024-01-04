@@ -1,6 +1,6 @@
-using Patterns.Creation.Factory;
 using Patterns.Decoupling.ServiceLocator;
 using Ships;
+using Ships.Enemies;
 using UI;
 using UnityEngine;
 

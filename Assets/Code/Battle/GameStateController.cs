@@ -21,12 +21,12 @@ public class GameStateController : MonoBehaviour
 
     private void Start()
     {
-        var gameFacade = ServiceLocator.Instance.GetService<IGameFacade>();
+        var stopBattleCommand = new StopBattleCommand();
         idToState = new Dictionary<GameStates, IGameState>
         {
             {GameStates.Playing, new PlayingState() },
-            {GameStates.GameOver, new GameOverState(gameFacade) },
-            {GameStates.Victory, new VictoryState(gameFacade) }
+            {GameStates.GameOver, new GameOverState(stopBattleCommand) },
+            {GameStates.Victory, new VictoryState(stopBattleCommand) }
         };
         currentState = GetState(GameStates.Playing);
         currentState.Start(ChangeNextState);

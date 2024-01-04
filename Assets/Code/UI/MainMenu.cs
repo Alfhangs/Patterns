@@ -1,5 +1,6 @@
 using Patterns.Behaviour.Command;
 using Patterns.Decoupling.ServiceLocator;
+using Patterns.Structural.Composite.Command;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,7 +15,11 @@ public class MainMenu : MonoBehaviour
 
     private void OnStartPressedButton()
     {
-
-        ServiceLocator.Instance.GetService<CommandQueue>().AddCommand(new LoadGameSceneCommand());
+        var loadSceneCommand = new LoadGameSceneCommand();
+        /*var compositeCommand = new CompositeCommand();
+        compositeCommand.AddCommand(new LoadSceneCommand("Game"));
+        compositeCommand.AddCommand(new StartBattleCommand());
+        ServiceLocator.Instance.GetService<CommandQueue>().AddCommand(compositeCommand);*/
+        ServiceLocator.Instance.GetService<CommandQueue>().AddCommand(loadSceneCommand);
     }
 }

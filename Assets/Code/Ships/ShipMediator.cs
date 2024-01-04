@@ -25,12 +25,14 @@ namespace Ships
 
         private void Start()
         {
+            ServiceLocator.Instance.GetService<IEventQueue>().Subscribe(EventIds.Restart, this);
             ServiceLocator.Instance.GetService<IEventQueue>().Subscribe(EventIds.GameOver, this);
             ServiceLocator.Instance.GetService<IEventQueue>().Subscribe(EventIds.Victory, this);
         }
 
         private void OnDestroy()
         {
+            ServiceLocator.Instance.GetService<IEventQueue>().UnSubscribe(EventIds.Restart, this);
             ServiceLocator.Instance.GetService<IEventQueue>().UnSubscribe(EventIds.GameOver, this);
             ServiceLocator.Instance.GetService<IEventQueue>().UnSubscribe(EventIds.Victory, this);
         }
@@ -98,9 +100,10 @@ namespace Ships
 
         public void Process(EventData eventData)
         {
-            if (eventData.EventId != EventIds.GameOver && eventData.EventId != EventIds.Victory)
+            if (eventData.EventId != EventIds.GameOver && eventData.EventId != EventIds.Victory && eventData.EventId != EventIds.Restart)
                 return;
 
+            _weaponController.Restart();
             Destroy(gameObject);
         }
     }

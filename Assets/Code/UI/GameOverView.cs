@@ -9,46 +9,43 @@ using UnityEngine.UI;
 
 namespace UI
 {
-    public class GameOverView : MonoBehaviour, EventObserver
+    public class GameOverView : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI _scoreText;
         [SerializeField] private Button _restartButton;
         [SerializeField] private Button _backToMenuButton;
+        private IInGameMenuMediator _mediator;
 
         private void Awake()
         {
             _restartButton.onClick.AddListener(RestartGame);
             _backToMenuButton.onClick.AddListener(BackToMenu);
         }
-        private void Start()
+
+        internal void Configure(IInGameMenuMediator mediator)
         {
-            gameObject.SetActive(false);
-            ServiceLocator.Instance.GetService<IEventQueue>().Subscribe(EventIds.GameOver, this);
-        }
-        private void OnDestroy()
-        {
-            ServiceLocator.Instance.GetService<IEventQueue>().UnSubscribe(EventIds.GameOver, this);
+            _mediator = mediator;
         }
 
         private void RestartGame()
         {
-            ServiceLocator.Instance.GetService<CommandQueue>().AddCommand(new StartBattleCommand());
-            gameObject.SetActive(false);
+            _mediator.OnRestartPressed();
         }
 
         private void BackToMenu()
         {
-            ServiceLocator.Instance.GetService<CommandQueue>().AddCommand(new LoadSceneCommand("Menu"));
+            _mediator.OnBackToMenuPressed();
         }
 
-        public void Process(EventData eventData)
+        internal void Hide()
         {
-            
-            if (eventData.EventId == EventIds.GameOver)
-            {
-                _scoreText.SetText(ScoreView.Instance.CurrentScore.ToString());
-                gameObject.SetActive(true);
-            }
+            gameObject.SetActive(false);
+        }
+
+        internal void Show()
+        {
+            _scoreText.SetText(ScoreView.Instance.CurrentScore.ToString());
+            gameObject.SetActive(true);
         }
     }
 }
